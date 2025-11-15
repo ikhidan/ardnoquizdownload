@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Ardno Quiz Challenge</title>
+  <script>
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+    if (/android/i.test(userAgent)) {
+      window.location.href =
+        "https://play.google.com/store/apps/details?id=com.ikhidan.quizgate";
+    } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+      window.location.href =
+        "https://apps.apple.com/us/app/ardno-quiz-challenge/id6745230634";
+    } else {
+      // Desktop fallback page with both links
+      window.location.href =
+        "https://github.com/YOUR_USERNAME/ardnoquiz#download";
+    }
+  </script>
+</head>
+<body style="font-family: Arial; text-align:center; padding-top:50px;">
+  <h2>Redirecting…</h2>
+  <p>If not redirected automatically, choose your store:</p>
+  <p>
+    <a href="https://play.google.com/store/apps/details?id=com.ikhidan.quizgate">Google Play</a><br/>
+    <a href="https://apps.apple.com/us/app/ardno-quiz-challenge/id6745230634">App Store</a>
+  </p>
+</body>
+</html>
