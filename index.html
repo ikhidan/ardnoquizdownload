@@ -1,30 +1,491 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Ardno Quiz Challenge</title>
-  <script>
-    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+  <title>Ardno Quiz Challenge – Download Now</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Ardno Quiz Challenge – the ultimate quiz app for middle & high school students, trivia lovers, and lifelong learners. Available on Google Play and the App Store."
+  />
 
-    if (/android/i.test(userAgent)) {
-      window.location.href =
-        "https://play.google.com/store/apps/details?id=com.ikhidan.quizgate";
-    } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-      window.location.href =
-        "https://apps.apple.com/us/app/ardno-quiz-challenge/id6745230634";
-    } else {
-      // Desktop fallback page with both links
-      window.location.href =
-        "https://github.com/YOUR_USERNAME/ardnoquiz#download";
-    }
+  <script>
+    // Simple device detection for auto-redirect
+    (function () {
+      var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+      var isAndroid = /android/i.test(userAgent);
+      var isIOS =
+        /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+
+      if (isAndroid) {
+        // Redirect Android users to Google Play
+        window.location.href =
+          "https://play.google.com/store/apps/details?id=com.ikhidan.quizgate";
+      } else if (isIOS) {
+        // Redirect iOS users to App Store
+        window.location.href =
+          "https://apps.apple.com/us/app/ardno-quiz-challenge/id6745230634";
+      }
+      // Desktop & others will stay on this landing page
+    })();
   </script>
+
+  <style>
+    :root {
+      --primary: #0b4b85;
+      --primary-light: #1e88e5;
+      --accent: #ffc928;
+      --bg-gradient-start: #031b3a;
+      --bg-gradient-end: #0f569c;
+      --card-bg: rgba(255, 255, 255, 0.08);
+      --card-border: rgba(255, 255, 255, 0.2);
+      --text-main: #ffffff;
+      --text-muted: #d0e3ff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, sans-serif;
+      min-height: 100vh;
+      color: var(--text-main);
+      background: radial-gradient(circle at top, #1c7ed6, #031b3a 60%),
+        linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .page {
+      max-width: 1100px;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card {
+      flex: 1 1 340px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 24px 24px 28px;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(12px);
+    }
+
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(3, 169, 244, 0.15);
+      border: 1px solid rgba(144, 202, 249, 0.4);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .header-badge span.dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #4caf50;
+    }
+
+    h1 {
+      font-size: clamp(26px, 4vw, 34px);
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+
+    .brand-highlight {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+      max-width: 420px;
+    }
+
+    .feature-list {
+      list-style: none;
+      margin-bottom: 18px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 6px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .feature-item span.star {
+      color: var(--accent);
+      font-size: 16px;
+      line-height: 1.1;
+      margin-top: 1px;
+    }
+
+    .feature-item strong {
+      color: #ffffff;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .pill {
+      border-radius: 999px;
+      border: 1px solid rgba(187, 222, 251, 0.7);
+      padding: 4px 10px;
+      font-size: 11px;
+      color: var(--text-muted);
+      background: rgba(3, 105, 161, 0.5);
+      white-space: nowrap;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-size: 14px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: transform 0.12s ease, box-shadow 0.12s ease,
+        background 0.12s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #ff9800);
+      color: #1b2430;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.5);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-main);
+      border: 1px solid rgba(187, 222, 251, 0.5);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(10, 46, 88, 0.7);
+    }
+
+    .store-label {
+      font-size: 11px;
+      opacity: 0.9;
+    }
+
+    .footnote {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Right side: mock phone / promo */
+    .visual {
+      flex: 1 1 320px;
+      min-height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .phone-frame {
+      width: 260px;
+      max-width: 90%;
+      aspect-ratio: 9 / 19;
+      border-radius: 32px;
+      border: 2px solid rgba(255, 255, 255, 0.6);
+      padding: 10px;
+      background: radial-gradient(circle at top, #1e88e5, #0d1b2a);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .phone-top-notch {
+      width: 60%;
+      height: 9px;
+      background: rgba(0, 0, 0, 0.65);
+      border-radius: 0 0 999px 999px;
+      align-self: center;
+      margin-bottom: 8px;
+    }
+
+    .phone-inner {
+      flex: 1;
+      border-radius: 22px;
+      background: linear-gradient(180deg, #ffca28, #fef3c7);
+      padding: 16px 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .phone-app-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1b1b1b;
+      margin-bottom: 4px;
+    }
+
+    .phone-greeting {
+      font-size: 11px;
+      margin-bottom: 6px;
+      color: #4b5563;
+    }
+
+    .phone-tagline {
+      font-size: 10px;
+      color: #6b7280;
+      margin-bottom: 10px;
+    }
+
+    .phone-chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-bottom: 10px;
+    }
+
+    .phone-chip {
+      font-size: 9px;
+      border-radius: 999px;
+      padding: 3px 7px;
+      background: #111827;
+      color: #fef3c7;
+    }
+
+    .phone-main-card {
+      background: #111827;
+      border-radius: 14px;
+      padding: 8px 9px;
+      color: #f9fafb;
+      margin-bottom: 8px;
+    }
+
+    .phone-main-card-title {
+      font-size: 11px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .phone-main-card-text {
+      font-size: 9px;
+      color: #e5e7eb;
+    }
+
+    .phone-footer-row {
+      display: flex;
+      gap: 6px;
+      margin-top: auto;
+      align-items: center;
+    }
+
+    .phone-btn-small {
+      flex: 1;
+      font-size: 9px;
+      padding: 5px 6px;
+      border-radius: 999px;
+      text-align: center;
+      background: #16a34a;
+      color: #f9fafb;
+    }
+
+    .phone-btn-secondary {
+      flex: 1;
+      font-size: 9px;
+      padding: 5px 6px;
+      border-radius: 999px;
+      text-align: center;
+      background: #0f172a;
+      color: #facc15;
+      border: 1px solid #facc15;
+    }
+
+    .phone-score-pill {
+      font-size: 9px;
+      padding: 4px 6px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      color: #fef9c3;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 16px;
+      }
+
+      .card {
+        padding: 20px 18px 22px;
+      }
+
+      .subtitle {
+        max-width: none;
+      }
+
+      .page {
+        gap: 18px;
+      }
+    }
+  </style>
 </head>
-<body style="font-family: Arial; text-align:center; padding-top:50px;">
-  <h2>Redirecting…</h2>
-  <p>If not redirected automatically, choose your store:</p>
-  <p>
-    <a href="https://play.google.com/store/apps/details?id=com.ikhidan.quizgate">Google Play</a><br/>
-    <a href="https://apps.apple.com/us/app/ardno-quiz-challenge/id6745230634">App Store</a>
-  </p>
+<body>
+  <div class="page" id="download">
+    <div class="card">
+      <div class="header-badge">
+        <span class="dot"></span>
+        <span>Quiz & Brain Training App</span>
+      </div>
+      <h1>
+        <span class="brand-highlight">Ardno Quiz Challenge</span><br />
+        Test your knowledge. Win big.
+      </h1>
+      <p class="subtitle">
+        A fun, fast-paced quiz game with dozens of categories – built for
+        middle school, high school students, and quiz lovers who want to stay
+        sharp every day.
+      </p>
+
+      <ul class="feature-list">
+        <li class="feature-item">
+          <span class="star">★</span>
+          <span><strong>Free to play</strong> with engaging daily challenges.</span>
+        </li>
+        <li class="feature-item">
+          <span class="star">★</span>
+          <span><strong>Earn points & redeem via PayPal</strong> in supported regions.</span>
+        </li>
+        <li class="feature-item">
+          <span class="star">★</span>
+          <span>
+            <strong>Perfect for quiz lovers, middle & high school students</strong> who want to
+            maintain and grow their intelligence.
+          </span>
+        </li>
+        <li class="feature-item">
+          <span class="star">★</span>
+          <span>
+            60+ categories including <strong>Math, Tech & Science, Art & Music, History,
+            Bible, Sports, Riddles</strong> and more.
+          </span>
+        </li>
+      </ul>
+
+      <div class="pill-row">
+        <span class="pill">🧮 Mathematics & Integers</span>
+        <span class="pill">🧪 Physics, Chemistry, Biology</span>
+        <span class="pill">💻 Tech & Computer Science</span>
+        <span class="pill">🎨 Art & 🎵 Music</span>
+        <span class="pill">📚 Literature & History</span>
+        <span class="pill">🧠 Riddles & Brain Teasers</span>
+      </div>
+
+      <div class="buttons">
+        <a
+          class="btn btn-primary"
+          href="https://play.google.com/store/apps/details?id=com.ikhidan.quizgate"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span>Download on Google Play</span>
+        </a>
+        <a
+          class="btn btn-ghost"
+          href="https://apps.apple.com/us/app/ardno-quiz-challenge/id6745230634"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span class="store-label">Also available on</span>
+          <span>App Store</span>
+        </a>
+      </div>
+
+      <p class="footnote">
+        If you’re not redirected automatically on mobile, tap the store button above to
+        install Ardno Quiz Challenge.
+      </p>
+    </div>
+
+    <div class="visual">
+      <div class="phone-frame">
+        <div class="phone-top-notch"></div>
+        <div class="phone-inner">
+          <div>
+            <div class="phone-app-title">Ardno Quiz Challenge</div>
+            <div class="phone-greeting">Hi Player, ready to challenge your brain?</div>
+            <div class="phone-tagline">
+              Choose your category, beat the timer, earn points & climb the leaderboard.
+            </div>
+            <div class="phone-chip-row">
+              <div class="phone-chip">Math & Science</div>
+              <div class="phone-chip">Art & Music</div>
+              <div class="phone-chip">General Knowledge</div>
+            </div>
+
+            <div class="phone-main-card">
+              <div class="phone-main-card-title">
+                <span>Quiz in progress…</span>
+                <span>00:26 ⏱</span>
+              </div>
+              <div class="phone-main-card-text">
+                “Which of these subjects combines logic, memory and creativity to keep your
+                brain in top shape?”
+              </div>
+            </div>
+          </div>
+
+          <div class="phone-footer-row">
+            <div class="phone-btn-small">Start Quiz</div>
+            <div class="phone-btn-secondary">Redeem via PayPal</div>
+            <div class="phone-score-pill">Score: 1450</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
+
